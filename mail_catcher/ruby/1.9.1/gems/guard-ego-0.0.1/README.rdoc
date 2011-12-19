@@ -1,0 +1,67 @@
+= Guard::Passenger
+
+Guard::Passenger is the useful development server solution. The guard automatically starts passenger and intelligently restarts the server when needed.
+
+== Install
+
+Please be sure to have {guard}[http://github.com/guard/guard] installed before continue.
+
+Install the gem:
+
+    gem install guard-passenger
+
+Add it to your Gemfile (inside test group):
+
+    gem 'guard-passenger'
+
+Add guard definition to your Guardfile by running this command:
+
+    guard init passenger
+
+== Usage
+
+Please read {guard usage doc}[http://github.com/guard/guard#readme]
+
+== Guardfile
+
+Passenger guard can be really be adapted to all kind of rack project with passenger.
+Please read {guard doc}[http://github.com/guard/guard#readme] for more info about Guardfile DSL.
+
+=== Standard rails app
+
+    guard 'passenger' do
+      watch('lib/.*\.rb')
+      watch('config/.*\.rb')
+    end
+
+=== Passenger standalone
+
+Passenger standalone is used as default. You can pass options to the guard to disable or configure it. Guard::Passenger will start passenger on startup and take it down on exit.
+By default passenger standalone is activated and port is set to 3000.
+
+=== Touching
+
+If touching is enabled Guard::Passenger will open the given path. By default it requests http://localhost:3000/ and checks if the http status is alright.
+
+=== Guard options
+
+Guard::Passenger accepts some options for configuration.
+
+    # :standalone    boolean     run passenger standalone                     (default: true)
+    # :port          integer     using the given port                         (default: 3000)
+    # :env           string      framework environment                        (default: development)
+    # :touch         string      path to check if restart was successful      (default: /)            (false = off)
+
+    guard 'passenger', :standalone => false, :port => 3001, :env => 'production', :touch => '/users/all' do
+    end
+
+== Development
+
+- Source hosted at {GitHub}[http://github.com/guard/guard-passenger]
+- Report issues/Questions/Feature requests on {GitHub Issues}[http://github.com/guard/guard-passenger/issues]
+
+Pull requests are very welcome! Make sure your patches are well tested. Please create a topic branch for every separate change you make.
+
+== Authors
+
+{Fabio Kuhn}[http://github.com/mordaroso]
