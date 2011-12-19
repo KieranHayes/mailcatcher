@@ -34,6 +34,7 @@ class MailCatcher::Web < Sinatra::Base
           end
         end)
     else
+      expires 0
       MailCatcher::Mail.messages.to_json
     end
   end
