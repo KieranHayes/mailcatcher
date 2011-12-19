@@ -171,7 +171,7 @@ class MailCatcher
               $iframe.find("#result").text data
 
   refresh: ->
-    $.getJSON '/messages', (messages) =>
+    $.getJSON '/messages?'+(new Date).getTime(), (messages) =>
       $.each messages, (i, message) =>
         unless @haveMessage message
           @addMessage message
